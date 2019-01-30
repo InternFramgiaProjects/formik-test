@@ -124,3 +124,22 @@ validationSchema: Yup.object().shape({ // Validate form field
 
 errors object chứa các message báo lỗi liên vi phạm quy ước cho các field.
 Truy cập qua this.props.errors.[field_name]
+
+
+### SEE MORE: 
+
+##### Method validate : https://github.com/jquense/yup
+
+### XỬ LÝ VẤN ĐỀ
+
+Tương tác với 1 field thì các field còn lại cũng báo lỗi
+=> use "touched" của Formik
+Ban đâu: boolean;
+        sẽ trả về true nếu đã từng tương tác với field đó
+        (tương tác tính từ thời điểm lần đâu tiên chúng ta chạm vào field đó)
+
+Để sử dụng được thuộc tính này, ta sẽ cần import 2 component của Formik là ( Form + Field ) ở cùng với vị trí mà chúng ta đã import withFormik.
+
+### => TỐI ƯU
+
+Ở mỗi field nhập liệu, ta đều phải thêm đi thêm lại các phần.
