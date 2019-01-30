@@ -66,3 +66,61 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### Use:
+- Material-UI - package hỗ trợ sẵn việc style cho các component React
+- Formik - package dùng để quản lý form
+- Yup - package dùng để validate dữ liệu
+
+### Steps:
+
+#### 1. create-react-app formik-test
+
+#### 2. Create SignupForm component inside App.
+
+##### 3.1. Install Formik:
+
+    3.1.1 npm i formik
+    OR
+    3.1.2 yarn add formik
+
+##### 3.2 Declare FormikForm const inside SignupForm, then export default FormikForm
+withFormik ở đây chính là một Higher Order Component
+import { withFormik } from 'formik'
+...
+const FormikForm = withFormik({
+    mapPropsToValues() { 
+        return {
+            // Init form field
+        }
+    },
+})(applied_conponent)
+
+##### 3.3 this.props.values là props chứa đựng giá trị của các field.
+Bonus: Formik đã định nghĩa sẵn hàm handleInputChange 
+=> use:  ...onChange={this.props.handleChange} 
+
+
+#### 4. Validation with Yup
+
+##### 4.1. Install
+npm install yup
+OR
+yarn add yup
+
+##### 4.2. Setting condition
+import * as Yup from 'yup'
+
+// put code ngang hàng với mapPropsToValues() phía trên
+validationSchema: Yup.object().shape({ // Validate form field
+    username: Yup.string()
+        .required('Username is required')
+        .min(5, 'Username must have min 5 characters')
+        .max(10, 'Username have max 10 characters'),
+})
+
+#### GET ERRORS
+
+errors object chứa các message báo lỗi liên vi phạm quy ước cho các field.
+Truy cập qua this.props.errors.[field_name]
